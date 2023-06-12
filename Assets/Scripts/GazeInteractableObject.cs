@@ -8,25 +8,24 @@ using UnityEngine.Events;
 public class GazeInteractableObject: MonoBehaviour
 {
     public bool isBeingGazed = false;
-    public bool isTriggered = false;
     
-    public float gazeTime = 0f;
-    public float clickGazeThreshold = 2f;       // after 2 seconds -> count as a click
-
-    public UnityEvent gazeClickEvent, gazeExitEvent;
+    public UnityEvent gazeEnterEvent, gazeClickEvent, gazeUpdateEvent, gazeExitEvent;
 
     public void OnPointerEnter()
     {
-        gazeTime = 0f;
         isBeingGazed = true;
+        gazeEnterEvent.Invoke();
     }
 
     public void OnPointerExit()
     {
-        gazeTime = 0f;
-        isTriggered = false;
         isBeingGazed = false;
         gazeExitEvent.Invoke();
+    }
+
+    public void OnPointerClick()
+    {
+        gazeClickEvent.Invoke();
     }
 
     private void Update()
@@ -36,19 +35,7 @@ public class GazeInteractableObject: MonoBehaviour
         //    this.transform.localRotation.eulerAngles.z);
         if (isBeingGazed)
         {
-            gazeTime += Time.deltaTime;
+            gazeUpdateEvent.Invoke();
         }
-        if (gazeTime >= clickGazeThreshold)
-        {
-            TriggerGazeClickEvent();
-            //gazeTime = 0f;
-        }
-    }
-
-    public void TriggerGazeClickEvent()
-    {
-        if (isTriggered) return;
-        isTriggered = true;
-        gazeClickEvent.Invoke();
     }
 }

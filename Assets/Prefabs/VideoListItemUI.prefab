@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5541276695274221587}
   - component: {fileID: 8705325635924364687}
   - component: {fileID: 3735071395239409671}
-  - component: {fileID: 2665980419650888568}
+  - component: {fileID: 7913055780640105666}
   m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
@@ -108,7 +108,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &2665980419650888568
+--- !u!114 &7913055780640105666
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,10 +117,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 992326849969729147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48efec0e594fd7849a7ecbbd45cb6054, type: 3}
+  m_Script: {fileID: 11500000, guid: b35595858fa2f5e48a72d1b7516873a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMouseDownEvent:
+  isBeingGazed: 0
+  gazeEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  gazeClickEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1253450832554732341}
@@ -135,7 +139,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onMouseUpEvent:
+  gazeUpdateEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  gazeExitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &2132183159507966786
@@ -337,7 +344,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &413994168495311398
 Transform:
   m_ObjectHideFlags: 0

@@ -242,9 +242,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingGazed: 0
-  isTriggered: 0
-  gazeTime: 0
-  clickGazeThreshold: 2
+  gazeEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
   gazeClickEvent:
     m_PersistentCalls:
       m_Calls:
@@ -260,6 +260,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  gazeUpdateEvent:
+    m_PersistentCalls:
+      m_Calls: []
   gazeExitEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -718,6 +721,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 314068637}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &317342904
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 317342905}
+  m_Layer: 3
+  m_Name: StopBoxGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &317342905
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317342904}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2015226785}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &392211619
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,6 +1194,7 @@ GameObject:
   - component: {fileID: 536073313}
   - component: {fileID: 536073314}
   - component: {fileID: 536073315}
+  - component: {fileID: 536073316}
   m_Layer: 3
   m_Name: VideoListUI
   m_TagString: Untagged
@@ -1174,8 +1209,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536073310}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.174, y: -0.0254, z: 0.1671}
+  m_LocalRotation: {x: -0, y: 0.92525434, z: -0, w: 0.3793473}
+  m_LocalPosition: {x: -0.1214, y: 0.0247, z: 0.0406}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1186,7 +1221,7 @@ Transform:
   - {fileID: 1641715674}
   m_Father: {fileID: 2015226785}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 135.414, z: 0}
 --- !u!114 &536073312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1254,12 +1289,88 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalParent: {fileID: 2015226785}
   moveParent: 0
+  isDragging: 0
+  isFocused: 0
+  oldPos: {x: 0, y: 0, z: 0}
   limitRange: 0
   limitRangeMin: {x: 0, y: 0, z: 0}
   limitRangeMax: {x: 0, y: 0, z: 0}
   constrainX: 0
   constrainY: 0
   constrainZ: 0
+--- !u!114 &536073316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536073310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35595858fa2f5e48a72d1b7516873a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBeingGazed: 0
+  gazeEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 536073315}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 536073315}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: ToggleDragMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeUpdateEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 536073315}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: DragObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 536073315}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: Unselect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &576831828
 GameObject:
   m_ObjectHideFlags: 0
@@ -1308,9 +1419,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingGazed: 0
-  isTriggered: 0
-  gazeTime: 0
-  clickGazeThreshold: 3
+  gazeEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
   gazeClickEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1326,6 +1437,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  gazeUpdateEvent:
+    m_PersistentCalls:
+      m_Calls: []
   gazeExitEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -1489,8 +1603,6 @@ GameObject:
   - component: {fileID: 705554470}
   - component: {fileID: 705554469}
   - component: {fileID: 705554472}
-  - component: {fileID: 705554473}
-  - component: {fileID: 705554474}
   m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
@@ -1506,8 +1618,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705554467}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.0498, z: 0}
-  m_LocalScale: {x: 0.015, y: 0.015, z: 0.015}
+  m_LocalPosition: {x: -0.0048, y: 0.0498, z: -0}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 461329561}
@@ -1598,48 +1710,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isBeingGazed: 0
-  isTriggered: 0
-  gazeTime: 0
-  clickGazeThreshold: 2
+  gazeEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
   gazeClickEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  gazeExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &705554473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705554467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6d59f8dfe09354285afa3e08f32fd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalParent: {fileID: 2015226785}
-  moveParent: 1
-  limitRange: 0
-  limitRangeMin: {x: 0, y: 0, z: 0}
-  limitRangeMax: {x: 0, y: 0, z: 0}
-  constrainX: 0
-  constrainY: 0
-  constrainZ: 0
---- !u!114 &705554474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 705554467}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48efec0e594fd7849a7ecbbd45cb6054, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  onMouseDownEvent:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 536073313}
@@ -1653,11 +1727,11 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
-  onMouseDragEvent:
+        m_CallState: 1
+  gazeUpdateEvent:
     m_PersistentCalls:
       m_Calls: []
-  onMouseUpEvent:
+  gazeExitEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &719014073
@@ -2181,6 +2255,8 @@ GameObject:
   - component: {fileID: 1017714626}
   - component: {fileID: 1017714627}
   - component: {fileID: 1017714628}
+  - component: {fileID: 1017714630}
+  - component: {fileID: 1017714631}
   m_Layer: 3
   m_Name: Knuckle
   m_TagString: Untagged
@@ -2288,6 +2364,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalParent: {fileID: 1445092417}
   moveParent: 0
+  isDragging: 0
+  isFocused: 0
+  oldPos: {x: 0, y: 0, z: 0}
   limitRange: 1
   limitRangeMin: {x: 0, y: 0, z: 0}
   limitRangeMax: {x: 0, y: 0, z: 0}
@@ -2303,17 +2382,69 @@ MonoBehaviour:
   m_GameObject: {fileID: 1017714621}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48efec0e594fd7849a7ecbbd45cb6054, type: 3}
+  m_Script: {fileID: 11500000, guid: b35595858fa2f5e48a72d1b7516873a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMouseDownEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onMouseDragEvent:
+  isBeingGazed: 0
+  gazeEnterEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1291309920}
-        m_TargetAssemblyTypeName: ThreeDSlider, Assembly-CSharp
+      - m_Target: {fileID: 1017714626}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1017714626}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: ToggleDragMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1278303982}
+        m_TargetAssemblyTypeName: VRVideoManager, Assembly-CSharp
+        m_MethodName: TogglePlayVideo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeUpdateEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1017714626}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: DragObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1017714630}
+        m_TargetAssemblyTypeName: ThreeDSliderKnuckle, Assembly-CSharp
         m_MethodName: ChangeValue
         m_Mode: 1
         m_Arguments:
@@ -2324,9 +2455,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onMouseUpEvent:
+  gazeExitEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1017714626}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: Unselect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!54 &1017714628
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2347,13 +2490,87 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 124
   m_CollisionDetection: 0
+--- !u!114 &1017714630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017714621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c889baa23e12eb469a0b4d81603567c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1291309920}
+  reverse: 0
+  startMarker: {fileID: 719014074}
+  endMarker: {fileID: 1834137040}
+  range: 0.09
+--- !u!114 &1017714631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017714621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48efec0e594fd7849a7ecbbd45cb6054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onMouseDownEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1017714626}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: ToggleDragMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1278303982}
+        m_TargetAssemblyTypeName: VRVideoManager, Assembly-CSharp
+        m_MethodName: TogglePlayVideo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onMouseDragEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1017714626}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: DragObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onMouseUpEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1041332869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2534,13 +2751,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2015226786}
   videos:
-  - {fileID: 32900000, guid: d4a6ebda4f317db4cafec45f557b1719, type: 3}
-  - {fileID: 32900000, guid: 90f391d4d14297f41ac6ad9cdd2c1c14, type: 3}
+  - {fileID: 32900000, guid: c95b37b4968b7d445b5647382aa2dcf3, type: 3}
+  - {fileID: 32900000, guid: c4c7e65ea003e3c4e99093c19c01349d, type: 3}
   index: 0
   dropdown: {fileID: 1503723723}
-  timeSlider: {fileID: 1452362650}
   videoListUI: {fileID: 536073313}
-  timeSlider3D: {fileID: 1291309920}
+  videoListInitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  videoPlayEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  videoPauseEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  videoRunningEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1291309924}
+        m_TargetAssemblyTypeName: VideoTimeSlider, Assembly-CSharp
+        m_MethodName: UpdateValue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  videoSourceChangeEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1291309924}
+        m_TargetAssemblyTypeName: VideoTimeSlider, Assembly-CSharp
+        m_MethodName: OnVideoSourceChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1291309918
 GameObject:
   m_ObjectHideFlags: 0
@@ -2551,8 +2805,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1291309919}
   - component: {fileID: 1291309920}
+  - component: {fileID: 1291309921}
+  - component: {fileID: 1291309923}
+  - component: {fileID: 1291309922}
+  - component: {fileID: 1291309924}
   m_Layer: 3
-  m_Name: 3DSlider
+  m_Name: VideoTime3DSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2565,15 +2823,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291309918}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.0217, y: -0.0077, z: 0.3186}
+  m_LocalRotation: {x: -0, y: 0.97273064, z: 0.23193797, w: 0}
+  m_LocalPosition: {x: 0.0217, y: -0.103, z: 0.22740002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1445092417}
   m_Father: {fileID: 2015226785}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: -26.822, y: 180, z: 0}
 --- !u!114 &1291309920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2588,12 +2846,138 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 0
   maxValue: 1
-  reverse: 0
-  startMarker: {fileID: 719014074}
-  endMarker: {fileID: 1834137040}
-  range: 0.09
-  knuckle: {fileID: 1017714621}
-  dragWithMouseComp: {fileID: 1017714626}
+  knuckle: {fileID: 1017714630}
+--- !u!65 &1291309921
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291309918}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.18208484, y: 0.018019384, z: 0.01}
+  m_Center: {x: -0.013443631, y: 0.00040521438, z: 4.2511645e-12}
+--- !u!114 &1291309922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291309918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35595858fa2f5e48a72d1b7516873a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBeingGazed: 0
+  gazeEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1291309923}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1291309923}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: ToggleDragMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeUpdateEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1291309923}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: DragObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1291309923}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: Unselect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1291309923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291309918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e6d59f8dfe09354285afa3e08f32fd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originalParent: {fileID: 2015226785}
+  moveParent: 0
+  isDragging: 0
+  isFocused: 0
+  oldPos: {x: 0, y: 0, z: 0}
+  limitRange: 0
+  limitRangeMin: {x: 0, y: 0, z: 0}
+  limitRangeMax: {x: 0, y: 0, z: 0}
+  constrainX: 0
+  constrainY: 0
+  constrainZ: 0
+--- !u!114 &1291309924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1291309918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c6d6b7bce86dbf4184c2c6860d49f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slider: {fileID: 1291309920}
+  vrVideoManager: {fileID: 1278303982}
 --- !u!1 &1325579332
 GameObject:
   m_ObjectHideFlags: 0
@@ -3089,7 +3473,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600345074}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd68f027e715c44aa8d097000d4cccfb, type: 3}
   m_Name: 
@@ -3284,6 +3668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1736795317}
+  - component: {fileID: 1736795321}
   - component: {fileID: 1736795319}
   - component: {fileID: 1736795318}
   - component: {fileID: 1736795320}
@@ -3301,8 +3686,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736795316}
-  m_LocalRotation: {x: 0, y: 0.9848078, z: -0, w: -0.17364809}
-  m_LocalPosition: {x: 0.1191, y: 0, z: 0.1812}
+  m_LocalRotation: {x: -0, y: 0.82709044, z: -0, w: -0.5620689}
+  m_LocalPosition: {x: 0.20383671, y: 0, z: 0.1070172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3311,7 +3696,7 @@ Transform:
   - {fileID: 314068638}
   m_Father: {fileID: 2015226785}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 200, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 248.39801, z: 0}
 --- !u!65 &1736795318
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3347,6 +3732,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalParent: {fileID: 2015226785}
   moveParent: 0
+  isDragging: 0
+  isFocused: 0
+  oldPos: {x: 0, y: 0, z: 0}
   limitRange: 0
   limitRangeMin: {x: 0, y: 0, z: 0}
   limitRangeMax: {x: 0, y: 0, z: 0}
@@ -3365,6 +3753,79 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98309870d5632a74887a18e3612ee020, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1736795321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736795316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35595858fa2f5e48a72d1b7516873a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isBeingGazed: 0
+  gazeEnterEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1736795319}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeClickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1736795319}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: ToggleDragMode
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeUpdateEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1736795319}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: DragObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  gazeExitEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1736795319}
+        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
+        m_MethodName: Unselect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1803981301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3624,7 +4085,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -3806,6 +4267,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalParent: {fileID: 0}
   moveParent: 0
+  isDragging: 0
+  isFocused: 0
+  oldPos: {x: 0, y: 0, z: 0}
   limitRange: 0
   limitRangeMin: {x: 0, y: 0, z: 0}
   limitRangeMax: {x: 0, y: 0, z: 0}
@@ -4073,6 +4537,7 @@ Transform:
   - {fileID: 1736795317}
   - {fileID: 536073311}
   - {fileID: 1291309919}
+  - {fileID: 317342905}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4168,17 +4633,9 @@ PrefabInstance:
       propertyPath: videoListUI
       value: 
       objectReference: {fileID: 536073313}
-    - target: {fileID: 3735071395239409671, guid: 66b7db26d0958a74c8666aadad6772b4, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6940307123154241369, guid: 66b7db26d0958a74c8666aadad6772b4, type: 3}
       propertyPath: m_Name
       value: VideoListItemUI
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940307123154241369, guid: 66b7db26d0958a74c8666aadad6772b4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

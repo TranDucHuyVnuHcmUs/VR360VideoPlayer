@@ -2,41 +2,43 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
 public class VRVideoManager : MonoBehaviour
 {
+    public static VRVideoManager instance;
+
     public VideoPlayer player;
     public List<VideoClip> videos;
     public int index;
 
     [Header("UI")]
     public Dropdown dropdown;
-    public Slider timeSlider;
     public VideoListUI videoListUI;
-    public ThreeDSlider timeSlider3D;
+
+    [Header("Events")]
+    public UnityEvent videoListInitEvent, videoPlayEvent, videoPauseEvent, videoRunningEvent, videoSourceChangeEvent;
+
+    private void Awake()
+    {
+        if (instance != null)
+            Debug.LogError("Two VR video manager exists!");
+        instance = this;
+    }
 
     public void Start()
     {
-        
         AddOptionsToUI();
+        videoListInitEvent.Invoke();
         ChangeSource();         // change the source into the default video.
     }
 
     private void AddOptionsToUI()
     {
-        //var options = new List<Dropdown.OptionData>();
-        //for (int i = 0; i < videos.Count; i++)
-        //{
-        //    options.Add(new Dropdown.OptionData(videos[i].name));
-        //}
-        //dropdown.AddOptions(options);
         videoListUI.AddOptions(this.videos);
         videoListUI.onValueChanged.AddListener(ChangeSource);
-
-        timeSlider3D.maxValue = player.frameCount; 
-        timeSlider3D.onValueChangedEvent.AddListener(ChangeFrameOfVideo);
     }
 
     public void ChangeSource(int index)
@@ -46,10 +48,9 @@ public class VRVideoManager : MonoBehaviour
             player.Stop();
         }
         player.clip = videos[index];
-        //timeSlider.maxValue = player.frameCount;
-        timeSlider3D.maxValue = player.frameCount;
-        //timeSlider.value = 0;           //reset the time slider.
-        timeSlider3D.UpdateValue(0);        //reset
+
+        videoSourceChangeEvent.Invoke();
+
         player.Play();
     }
 
@@ -59,27 +60,31 @@ public class VRVideoManager : MonoBehaviour
         ChangeSource(this.index);
     }
 
-    public void PlayVideo() { player.Play(); }
-    public void PauseVideo() { player.Pause(); }
-    public void StopVideo() { player.Stop(); }
-
-    public void ChangeTimeOfVideo()
-    {
-        player.Pause();
-        player.frame = (long)timeSlider.value;
+    public void PlayVideo() {
         player.Play();
+        videoPlayEvent.Invoke();
+    }
+    public void PauseVideo() {
+        player.Pause();
+        videoPauseEvent.Invoke();
+    }
+    public void TogglePlayVideo() { 
+        if (player.isPlaying) PauseVideo(); else PlayVideo(); 
+    }
+
+    public void StopVideo() { 
+        player.Stop(); 
     }
 
     public void ChangeFrameOfVideo(float frame)
     {
-        player.Pause();
-        Debug.Log("Frame " + frame.ToString());
         player.frame = (long)frame;
-        player.Play();
     }
 
     public void Update()
     {
         //timeSlider3D.UpdateValue(player.frame);
+        if (player.isPlaying)
+            videoRunningEvent.Invoke();
     }
 }
