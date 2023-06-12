@@ -2252,11 +2252,11 @@ GameObject:
   - component: {fileID: 1017714625}
   - component: {fileID: 1017714624}
   - component: {fileID: 1017714623}
-  - component: {fileID: 1017714626}
   - component: {fileID: 1017714627}
   - component: {fileID: 1017714628}
   - component: {fileID: 1017714630}
   - component: {fileID: 1017714631}
+  - component: {fileID: 1017714632}
   m_Layer: 3
   m_Name: Knuckle
   m_TagString: Untagged
@@ -2273,7 +2273,7 @@ Transform:
   m_GameObject: {fileID: 1017714621}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
   m_LocalPosition: {x: -0.09, y: 0, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalScale: {x: 0.024999999, y: 0.024999999, z: 0.024999999}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1445092417}
@@ -2350,29 +2350,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017714621}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1017714626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1017714621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e6d59f8dfe09354285afa3e08f32fd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  originalParent: {fileID: 1445092417}
-  moveParent: 0
-  isDragging: 0
-  isFocused: 0
-  oldPos: {x: 0, y: 0, z: 0}
-  limitRange: 1
-  limitRangeMin: {x: 0, y: 0, z: 0}
-  limitRangeMax: {x: 0, y: 0, z: 0}
-  constrainX: 0
-  constrainY: 1
-  constrainZ: 1
 --- !u!114 &1017714627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2388,34 +2365,10 @@ MonoBehaviour:
   isBeingGazed: 0
   gazeEnterEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1017714626}
-        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
-        m_MethodName: Select
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   gazeClickEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1017714626}
-        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
-        m_MethodName: ToggleDragMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1278303982}
         m_TargetAssemblyTypeName: VRVideoManager, Assembly-CSharp
         m_MethodName: TogglePlayVideo
@@ -2428,12 +2381,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  gazeUpdateEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1017714626}
-        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
-        m_MethodName: DragObject
+      - m_Target: {fileID: 1017714632}
+        m_TargetAssemblyTypeName: DragWithMath, Assembly-CSharp
+        m_MethodName: ToggleDragMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2443,6 +2393,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  gazeUpdateEvent:
+    m_PersistentCalls:
+      m_Calls:
       - m_Target: {fileID: 1017714630}
         m_TargetAssemblyTypeName: ThreeDSliderKnuckle, Assembly-CSharp
         m_MethodName: ChangeValue
@@ -2455,12 +2408,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1017714632}
+        m_TargetAssemblyTypeName: DragWithMath, Assembly-CSharp
+        m_MethodName: DragObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   gazeExitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1017714626}
-        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
-        m_MethodName: Unselect
+      - m_Target: {fileID: 1017714632}
+        m_TargetAssemblyTypeName: DragWithMath, Assembly-CSharp
+        m_MethodName: StopDragging
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2529,18 +2494,6 @@ MonoBehaviour:
   onMouseDownEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1017714626}
-        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
-        m_MethodName: ToggleDragMode
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1278303982}
         m_TargetAssemblyTypeName: VRVideoManager, Assembly-CSharp
         m_MethodName: TogglePlayVideo
@@ -2553,12 +2506,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onMouseDragEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1017714626}
-        m_TargetAssemblyTypeName: DragWithMouse, Assembly-CSharp
-        m_MethodName: DragObject
+      - m_Target: {fileID: 1017714632}
+        m_TargetAssemblyTypeName: DragWithMath, Assembly-CSharp
+        m_MethodName: ToggleDragMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2568,9 +2518,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onMouseDragEvent:
+    m_PersistentCalls:
+      m_Calls: []
   onMouseUpEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1017714632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017714621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b064aa55904127419dd06d3c1f98a9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  camPoint: {fileID: 0}
+  startPoint: {fileID: 719014074}
+  endPoint: {fileID: 1834137040}
+  isDragging: 0
+  emptyObj: {fileID: 2033223353}
+  bias: 0
 --- !u!1001 &1041332869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2823,15 +2794,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291309918}
-  m_LocalRotation: {x: -0, y: 0.97273064, z: 0.23193797, w: 0}
-  m_LocalPosition: {x: 0.0217, y: -0.103, z: 0.22740002}
+  m_LocalRotation: {x: -0.009491348, y: 0.9719158, z: 0.2317437, w: -0.039806}
+  m_LocalPosition: {x: 0.02170752, y: -0.10308277, z: 0.22756374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1445092417}
   m_Father: {fileID: 2015226785}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -26.822, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: -26.725, y: 185.253, z: -2.368}
 --- !u!114 &1291309920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4577,6 +4548,37 @@ VideoPlayer:
   m_WaitForFirstFrame: 1
   m_FrameReadyEventEnabled: 0
   m_VideoShaders: []
+--- !u!1 &2033223352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2033223353}
+  m_Layer: 0
+  m_Name: EmptyObj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2033223353
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033223352}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6662538869690256382
 PrefabInstance:
   m_ObjectHideFlags: 0

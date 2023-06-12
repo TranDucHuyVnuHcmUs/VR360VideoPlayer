@@ -48,7 +48,6 @@ public class DragWithMouse : MonoBehaviour
             this.transform.parent = Camera.main.transform;
         else this.transform.parent.parent = Camera.main.transform;
         oldPos = this.transform.position;
-        beginPos = this.transform.position;
 
         //StopActionCube.Instance.transform.position = new Vector3(
         //    this.transform.position.x,

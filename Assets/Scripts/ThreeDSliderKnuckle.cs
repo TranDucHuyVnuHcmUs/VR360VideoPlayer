@@ -5,7 +5,8 @@ using UnityEngine;
 public class ThreeDSliderKnuckle : MonoBehaviour
 {
     public ThreeDSlider slider;
-    private DragWithMouse dragWithMouseComp;
+    //private DragWithMouse dragWithMouseComp;
+    private DragWithMath dragWithMathComp;
 
     public bool reverse = false;        // reverse the direction of value
 
@@ -17,14 +18,14 @@ public class ThreeDSliderKnuckle : MonoBehaviour
     private void Awake()
     {
         range = (endMarker.transform.position.x - startMarker.transform.position.x);
-        dragWithMouseComp = GetComponent<DragWithMouse>();
+        dragWithMathComp = GetComponent<DragWithMath>();
     }
 
     private void Start()
     {
-        dragWithMouseComp.limitRange = true;
-        dragWithMouseComp.limitRangeMin = new Vector3(startMarker.position.x, -9999999, -9999999);
-        dragWithMouseComp.limitRangeMax = new Vector3(endMarker.position.x, 9999999, 9999999);
+        //dragWithMouseComp.limitRange = true;
+        //dragWithMouseComp.limitRangeMin = new Vector3(startMarker.position.x, -9999999, -9999999);
+        //dragWithMouseComp.limitRangeMax = new Vector3(endMarker.position.x, 9999999, 9999999);
     }
     public void UpdateValue(float value)
     {
@@ -37,7 +38,7 @@ public class ThreeDSliderKnuckle : MonoBehaviour
     public void ChangeValue()
     {
         //Debug.Log(this.knuckle.transform.position.x);
-        if (!dragWithMouseComp.isDragging) return;
+        if (!dragWithMathComp.isDragging) return;
         float value = ((this.transform.position.x - startMarker.position.x) / range) * slider.maxValue;
         if (reverse) value = slider.maxValue - value;
         slider.ChangeValue(value);
