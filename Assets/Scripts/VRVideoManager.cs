@@ -11,7 +11,9 @@ public class VRVideoManager : MonoBehaviour
     public static VRVideoManager instance;
 
     public VideoPlayer player;
-    public List<VideoClip> videos;
+    public VideoPicker videoPicker;
+    //public List<VideoClip> videos;
+    public VRVideoManagerConfigObj configObj;
     public int index;
 
     [Header("UI")]
@@ -19,7 +21,9 @@ public class VRVideoManager : MonoBehaviour
     public VideoListUI videoListUI;
 
     [Header("Events")]
-    public UnityEvent videoListInitEvent, videoPlayEvent, videoPauseEvent, videoRunningEvent, videoSourceChangeEvent;
+
+    public UnityEvent videoListInitEvent;
+    public UnityEvent videoPlayEvent, videoPauseEvent, videoRunningEvent, videoSourceChangeEvent, videoAddEvent;
 
     private void Awake()
     {
@@ -30,27 +34,28 @@ public class VRVideoManager : MonoBehaviour
 
     public void Start()
     {
+        configObj.LoadDataFromFile();
         AddOptionsToUI();
         videoListInitEvent.Invoke();
-        ChangeSource();         // change the source into the default video.
+        if (configObj.config.videos.Count > 0)
+            ChangeSource();         // change the source into the default video.
     }
 
     private void AddOptionsToUI()
     {
-        videoListUI.AddOptions(this.videos);
+        videoListUI.AddOptions(configObj.config.videos);
         videoListUI.onValueChanged.AddListener(ChangeSource);
+
+        videoPicker.videoPickedEvent.AddListener(AddVideo);
     }
 
     public void ChangeSource(int index)
     {
-        if (player.isPlaying)
-        {
-            player.Stop();
-        }
-        player.clip = videos[index];
+        if (player.isPlaying) player.Stop();
+        player.url = configObj.config.videos[index].url;
+        player.Prepare();           // must prepare first before enabling video controlling UI such as slider.
 
         videoSourceChangeEvent.Invoke();
-
         player.Play();
     }
 
@@ -79,6 +84,13 @@ public class VRVideoManager : MonoBehaviour
     public void ChangeFrameOfVideo(float frame)
     {
         player.frame = (long)frame;
+    }
+
+    public void AddVideo(VRVideo video)
+    {
+        configObj.AddVideo(video);
+        videoListUI.AddOptions(configObj.config.videos);
+        ChangeSource(configObj.config.videos.Count - 1);
     }
 
     public void Update()

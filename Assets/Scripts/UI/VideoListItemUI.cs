@@ -15,7 +15,7 @@ public class VideoListItemUI : MonoBehaviour
         this.titleText.text = text;
     }
 
-    public void SetVideoInfoOnUI(int index, VideoClip video)
+    public void SetVideoInfoOnUI(int index, VRVideo video)
     {
         this.index = index;
         this.titleText.text = video.name;

@@ -11,7 +11,7 @@ public class VideoListUI : MonoBehaviour
 {
     public VideoListItemUI playingItemUI;
     public List<VideoListItemUI> items;
-    public List<VideoClip> videos;
+    public List<VRVideo> videos;
     public int startIndex = 0;
     public bool isShowing = false;
 
@@ -22,7 +22,7 @@ public class VideoListUI : MonoBehaviour
         onValueChanged = new IntUnityEvent();    
     }
 
-    public void AddOptions(List<VideoClip> videos)
+    public void AddOptions(List<VRVideo> videos)
     {
         this.videos = videos;
         SetInfoOnItems();
