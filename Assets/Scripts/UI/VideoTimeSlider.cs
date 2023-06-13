@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
 public class VideoTimeSlider : MonoBehaviour
 {
@@ -16,6 +18,12 @@ public class VideoTimeSlider : MonoBehaviour
     {
         if (vrVideoManager == null) vrVideoManager = VRVideoManager.instance;
         slider.onValueChangedEvent.AddListener(vrVideoManager.ChangeFrameOfVideo);
+        VRVideoManager.instance.player.prepareCompleted += OnVideoPreparationCompleted;
+    }
+
+    private void OnVideoPreparationCompleted(VideoPlayer player)
+    {
+        slider.maxValue = player.frameCount;
     }
 
     public void UpdateValue() { 
@@ -25,6 +33,6 @@ public class VideoTimeSlider : MonoBehaviour
     public void OnVideoSourceChanged()
     {
         slider.ResetSlider();
-        slider.maxValue = VRVideoManager.instance.player.frameCount;
     }
+
 }
