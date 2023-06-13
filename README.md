@@ -22,18 +22,18 @@ If anyone's interested, please send me a DM, or you can create an issue in this 
 - Make Dropdown and time Slider UI. Link these two's on value changed event to the function that choose the video, or control the current playing time of the VideoPlayer.
 - Add 2 cube, one for playing/resuming video and other for pausing the video.
 - Change the layer of these 2 cube into the layer that you want CardboardReticlePointer to act on.
-- Implement gaze interaction component, using 2 float variable (gazing time and threshold) to allow user to look at the object and call the event once the gazing time are longer or equal the time threshold. 
+- (Previous) Implement gaze interaction component, using 2 float variable (gazing time and threshold) to allow user to look at the object and call the event once the gazing time are longer or equal the time threshold. 
+- You can also use OnPointerClick() function to allow user to click on the object.
+
+There's more functionalities, but I don't want to write too much: 
+- 3D dropdown (good enough) + time slider UI (bug not fixed), can be dragged to another place.
+- Playing local videos + simple data persistence.
 
 # License and Attribution
 The project will apply the main license as shown on the project's main page, expect for items taken by other sources, as written below:
 
-## Script
+## Script & libraries
 - [Making a shader for an inside out sphere unlit? - Unity Answers](https://answers.unity.com/questions/1155090/making-a-shader-for-an-inside-out-sphere-unlit.html) (the shader "InsideObjectShader" in Assets/Material)
-
-## Youtube videos
-To test, this project uses videos from Youtube:
-
-- [Vietnam in 360](https://youtu.be/VprMcdyNOeI)
-- [Vietnam’s Paranormal Portal _ Hanoi, Vietnam 360 VR Video _ Discovery TRVLR](https://youtu.be/Q62WHDEqhAs)
+- [Native File Picker for Android & iOS | Integration | Unity Asset Store](https://assetstore.unity.com/packages/tools/integration/native-file-picker-for-android-ios-173238) (used in VideoPicker class)
 
 You must not use these assets for any other purpose that violate the licenses of these assets. Please replace these assets with your own files that you are allowed to use legally.
