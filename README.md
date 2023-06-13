@@ -3,8 +3,8 @@ Play video on a sphere, then go inside it to watch. Maybe add some other control
 
 # Configurations
 This project is made and tested in:
-- Unity 2022.2.14f1
-- Google Cardboard VR SDK (newest, 5/5/2023)
+- Unity 2022.3.1f1
+- Google Cardboard VR SDK (5/5/2023)
 
 # Clone the project
 Install Git (and Github Desktop or other tools, if you want), then use clone command or tools to clone the project to your local machine.
